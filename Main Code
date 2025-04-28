@@ -89,3 +89,49 @@ void addNewPlayer() {
     string playerName;
     cout << "Enter player's name: ";
     getline(cin, playerName);
+
+
+//Pitching stats
+double walksAllowed, hitsAllowed, inningsPitched, strikeouts, earnedRuns;
+cout << "\n--- Pitching Stats ---\n";
+cout << "Enter number of walks allowed: ";
+cin >> walksAllowed;
+cout << "Enter number of hits allowed: ";
+cin >> hitsAllowed;
+cout << "Enter innings pitched: ";
+cin >> inningsPitched;
+cout << "Enter number of strikeouts: ";
+cin >> strikeouts;
+cout << "Enter number of earned runs allowed: ";
+cin >> earnedRuns;
+
+//Batting stats
+double hits, atBats, walksBatting, plateAppearances;
+cout << "\n--- Batting Stats ---\n";
+cout << "Enter number of hits: ";
+cin >> hits;
+cout << "Enter number of at-bats: ";
+cin >> atBats;
+cout << "Enter number of walks (batting): ";
+cin >> walksBatting;
+cout << "Enter number of plate appearances: ";
+cin >> plateAppearances;
+
+
+//guardar los calulos en variables 
+double whip = calculateWHIP(walksAllowed, hitsAllowed, inningsPitched);
+double era = calculateERA(earnedRuns, inningsPitched);
+double battingAverage = calculateBattingAverage(hits, atBats);
+double obp = calculateOBP(hits, walksBatting, plateAppearances);
+
+//output de datos
+cout << "\n--- Player Performance: " << playerName << " ---\n";
+cout << "Pitching:\n";
+cout << "WHIP: " << whip << endl;
+cout << "IP (Innings Pitched): " << inningsPitched << endl;
+cout << "Strikeouts: " << strikeouts << endl;
+cout << "ERA: " << era << endl;
+
+cout << "\nBatting:\n";
+cout << "Batting Average: " << battingAverage << endl;
+cout << "OBP (On Base Percentage): " << obp << endl;
