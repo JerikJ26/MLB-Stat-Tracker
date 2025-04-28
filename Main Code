@@ -1,0 +1,158 @@
+#include <iostream>
+#include <fstream> 
+#include <string>
+#include <cstdlib> // for system("cls")
+using namespace std;
+
+
+double calculateWHIP(double walks, double hits, double inningsPitched);
+double calculateERA(double earnedRuns, double inningsPitched);
+double calculateBattingAverage(double hits, double atBats);
+double calculateOBP(double hits, double walks, double plateAppearances);
+void viewPlayerStats();
+void addNewPlayer();
+
+double calculateWHIP(double walks, double hits, double inningsPitched) {
+    if (inningsPitched == 0) return 0;
+    return (walks + hits) / inningsPitched;
+}
+
+double calculateERA(double earnedRuns, double inningsPitched) {
+    if (inningsPitched == 0) return 0;
+    return (earnedRuns * 9) / inningsPitched;
+}
+
+double calculateBattingAverage(double hits, double atBats) {
+    if (atBats == 0) return 0;
+    return hits / atBats;
+}
+
+double calculateOBP(double hits, double walks, double plateAppearances) {
+    if (plateAppearances == 0) return 0;
+    return (hits + walks) / plateAppearances;
+}
+
+int main() {
+    int choice;
+    do {
+        system("cls"); // Borra los datos en pantalla para mejor claridad al leer el terminal 
+
+        cout << "=== Baseball Stats Manager ===\n";
+        cout << "1. View Current Player Stats\n";
+        cout << "2. Add New Player\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(); //el copilot auntocomplete de VS explota si no pongo el cin.ingonre()
+
+        switch (choice) {
+        case 1:
+            viewPlayerStats();
+            break;
+        case 2:
+            addNewPlayer();
+            break;
+        case 3:
+            cout << "Exiting program. Goodbye!\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 3);
+
+    return 0;
+}
+//funcion para ver los jugadores
+void viewPlayerStats() {
+    system("cls");
+    ifstream inputFile("player_stats.txt");
+    if (inputFile.is_open()) {
+        string line;
+        cout << "--- Current Player Stats ---\n\n";
+        while (getline(inputFile, line)) {
+            cout << line << endl;
+        }
+        inputFile.close();
+    }
+    else {
+        cout << "No player stats found or error opening file.\n";
+    }
+    cout << "\nPress Enter to return to the main menu...";
+    cin.ignore();
+    cin.get();
+    //si no hacemos el cin.ignore() y cin.get() el system cls borra la pantalla antes de poder ver los resultados
+}
+
+//funcion para agregar un nuevo jugador 
+void addNewPlayer() {
+    system("cls");
+    string playerName;
+    cout << "Enter player's name: ";
+    getline(cin, playerName);
+
+
+//Pitching stats
+double walksAllowed, hitsAllowed, inningsPitched, strikeouts, earnedRuns;
+cout << "\n--- Pitching Stats ---\n";
+cout << "Enter number of walks allowed: ";
+cin >> walksAllowed;
+cout << "Enter number of hits allowed: ";
+cin >> hitsAllowed;
+cout << "Enter innings pitched: ";
+cin >> inningsPitched;
+cout << "Enter number of strikeouts: ";
+cin >> strikeouts;
+cout << "Enter number of earned runs allowed: ";
+cin >> earnedRuns;
+
+//Batting stats
+double hits, atBats, walksBatting, plateAppearances;
+cout << "\n--- Batting Stats ---\n";
+cout << "Enter number of hits: ";
+cin >> hits;
+cout << "Enter number of at-bats: ";
+cin >> atBats;
+cout << "Enter number of walks (batting): ";
+cin >> walksBatting;
+cout << "Enter number of plate appearances: ";
+cin >> plateAppearances;
+
+
+//guardar los calulos en variables 
+double whip = calculateWHIP(walksAllowed, hitsAllowed, inningsPitched);
+double era = calculateERA(earnedRuns, inningsPitched);
+double battingAverage = calculateBattingAverage(hits, atBats);
+double obp = calculateOBP(hits, walksBatting, plateAppearances);
+
+//output de datos
+cout << "\n--- Player Performance: " << playerName << " ---\n";
+cout << "Pitching:\n";
+cout << "WHIP: " << whip << endl;
+cout << "IP (Innings Pitched): " << inningsPitched << endl;
+cout << "Strikeouts: " << strikeouts << endl;
+cout << "ERA: " << era << endl;
+
+cout << "\nBatting:\n";
+cout << "Batting Average: " << battingAverage << endl;
+cout << "OBP (On Base Percentage): " << obp << endl;
+
+	// guardar datos en un archivo
+    ofstream outputFile("player_stats.txt", ios::app); // ios::append para juntar lo nuevo con lo viejo
+    if (outputFile.is_open()) {
+        outputFile << "Player Name: " << playerName << endl;
+        outputFile << "Pitching Stats:\n";
+        outputFile << "WHIP: " << whip << endl;
+        outputFile << "IP (Innings Pitched): " << inningsPitched << endl;
+        outputFile << "Strikeouts: " << strikeouts << endl;
+        outputFile << "ERA: " << era << endl;
+        outputFile << "Batting Stats:\n";
+        outputFile << "Batting Average: " << battingAverage << endl;
+        outputFile << "OBP (On Base Percentage): " << obp << endl;
+        outputFile << "-----------------------------------\n";
+        outputFile.close();
+        cout << "\nPlayer stats saved to 'player_stats.txt'.\n";
+    }
+    else {
+        cout << "Error opening file to save data.\n";//error por si el archivo que intenta abrir no existe
+    }
+}
