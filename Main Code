@@ -135,3 +135,24 @@ cout << "ERA: " << era << endl;
 cout << "\nBatting:\n";
 cout << "Batting Average: " << battingAverage << endl;
 cout << "OBP (On Base Percentage): " << obp << endl;
+
+	// guardar datos en un archivo
+    ofstream outputFile("player_stats.txt", ios::app); // ios::append para juntar lo nuevo con lo viejo
+    if (outputFile.is_open()) {
+        outputFile << "Player Name: " << playerName << endl;
+        outputFile << "Pitching Stats:\n";
+        outputFile << "WHIP: " << whip << endl;
+        outputFile << "IP (Innings Pitched): " << inningsPitched << endl;
+        outputFile << "Strikeouts: " << strikeouts << endl;
+        outputFile << "ERA: " << era << endl;
+        outputFile << "Batting Stats:\n";
+        outputFile << "Batting Average: " << battingAverage << endl;
+        outputFile << "OBP (On Base Percentage): " << obp << endl;
+        outputFile << "-----------------------------------\n";
+        outputFile.close();
+        cout << "\nPlayer stats saved to 'player_stats.txt'.\n";
+    }
+    else {
+        cout << "Error opening file to save data.\n";//error por si el archivo que intenta abrir no existe
+    }
+}
