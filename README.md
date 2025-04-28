@@ -15,7 +15,7 @@ Contains Functions and their prototypes.
 
 Version 1.2
 
-First half of the main is added containging cin's and cout's that complements calculating functions.
+First half of the main() is added containging cin's and cout's that complements calculating functions.
 
 Version 1.6
 
