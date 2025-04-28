@@ -31,3 +31,61 @@ double calculateOBP(double hits, double walks, double plateAppearances) {
     if (plateAppearances == 0) return 0;
     return (hits + walks) / plateAppearances;
 }
+
+int main() {
+    int choice;
+    do {
+        system("cls"); // Borra los datos en pantalla para mejor claridad al leer el terminal 
+
+        cout << "=== Baseball Stats Manager ===\n";
+        cout << "1. View Current Player Stats\n";
+        cout << "2. Add New Player\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(); //el copilot auntocomplete de VS explota si no pongo el cin.ingonre()
+
+        switch (choice) {
+        case 1:
+            viewPlayerStats();
+            break;
+        case 2:
+            addNewPlayer();
+            break;
+        case 3:
+            cout << "Exiting program. Goodbye!\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 3);
+
+    return 0;
+}
+//funcion para ver los jugadores
+void viewPlayerStats() {
+    system("cls");
+    ifstream inputFile("player_stats.txt");
+    if (inputFile.is_open()) {
+        string line;
+        cout << "--- Current Player Stats ---\n\n";
+        while (getline(inputFile, line)) {
+            cout << line << endl;
+        }
+        inputFile.close();
+    }
+    else {
+        cout << "No player stats found or error opening file.\n";
+    }
+    cout << "\nPress Enter to return to the main menu...";
+    cin.ignore();
+    cin.get();
+    //si no hacemos el cin.ignore() y cin.get() el system cls borra la pantalla antes de poder ver los resultados
+}
+
+//funcion para agregar un nuevo jugador 
+void addNewPlayer() {
+    system("cls");
+    string playerName;
+    cout << "Enter player's name: ";
+    getline(cin, playerName);
