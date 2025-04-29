@@ -4,11 +4,6 @@
 #include <cstdlib> // for system("cls")
 using namespace std;
 
-
-double calculateWHIP(double walks, double hits, double inningsPitched);
-double calculateERA(double earnedRuns, double inningsPitched);
-double calculateBattingAverage(double hits, double atBats);
-double calculateOBP(double hits, double walks, double plateAppearances);
 void viewPlayerStats();
 void addNewPlayer();
 
