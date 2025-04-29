@@ -6,6 +6,7 @@ using namespace std;
 
 void viewPlayerStats();
 void addNewPlayer();
+void combineTwoPlayers();
 
 double calculateWHIP(double walks, double hits, double inningsPitched) {
     if (inningsPitched == 0) return 0;
@@ -35,10 +36,11 @@ int main() {
         cout << "=== Baseball Stats Manager ===\n";
         cout << "1. View Current Player Stats\n";
         cout << "2. Add New Player\n";
-        cout << "3. Exit\n";
+	cout << "3. Combine Two Players' Stats\n";
+        cout << "4. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
-        cin.ignore(); //el copilot auntocomplete de VS explota si no pongo el cin.ingonre()
+        cin.ignore(); 
 
         switch (choice) {
         case 1:
@@ -47,13 +49,16 @@ int main() {
         case 2:
             addNewPlayer();
             break;
-        case 3:
+	case 3:
+	combineTwoPlayers();
+	    break;
+        case 4:
             cout << "Exiting program. Goodbye!\n";
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 3);
+    } while (choice != 4);
 
     return 0;
 }
