@@ -1,8 +1,11 @@
+
 #include <iostream>
 #include <fstream> 
 #include <string>
 #include <cstdlib> // for system("cls")
 using namespace std;
+
+//Jerik 
 
 void viewPlayerStats();
 void addNewPlayer();
@@ -27,7 +30,7 @@ double calculateOBP(double hits, double walks, double plateAppearances) {
     if (plateAppearances == 0) return 0;
     return (hits + walks) / plateAppearances;
 }
-
+//Victor
 int main() {
     int choice;
     do {
@@ -36,7 +39,7 @@ int main() {
         cout << "=== Baseball Stats Manager ===\n";
         cout << "1. View Current Player Stats\n";
         cout << "2. Add New Player\n";
-	cout << "3. Combine Two Players' Stats\n";
+		cout << "3. Combine Two Players' Stats\n";
         cout << "4. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -49,9 +52,9 @@ int main() {
         case 2:
             addNewPlayer();
             break;
-	case 3:
-	combineTwoPlayers();
-	    break;
+		case 3:
+			combineTwoPlayers();
+			break;
         case 4:
             cout << "Exiting program. Goodbye!\n";
             break;
@@ -91,52 +94,58 @@ void addNewPlayer() {
     getline(cin, playerName);
 
 
-//Pitching stats
-double walksAllowed, hitsAllowed, inningsPitched, strikeouts, earnedRuns;
-cout << "\n--- Pitching Stats ---\n";
-cout << "Enter number of walks allowed: ";
-cin >> walksAllowed;
-cout << "Enter number of hits allowed: ";
-cin >> hitsAllowed;
-cout << "Enter innings pitched: ";
-cin >> inningsPitched;
-cout << "Enter number of strikeouts: ";
-cin >> strikeouts;
-cout << "Enter number of earned runs allowed: ";
-cin >> earnedRuns;
+    //Pitching stats
+    double walksAllowed, hitsAllowed, inningsPitched, strikeouts, earnedRuns;
+    cout << "\n--- Pitching Stats ---\n";
+    cout << "Enter number of walks allowed: ";
+    cin >> walksAllowed;
+    cout << "Enter number of hits allowed: ";
+    cin >> hitsAllowed;
+    cout << "Enter innings pitched: ";
+    cin >> inningsPitched;
+    cout << "Enter number of strikeouts: ";
+    cin >> strikeouts;
+    cout << "Enter number of earned runs allowed: ";
+    cin >> earnedRuns;
 
-//Batting stats
-double hits, atBats, walksBatting, plateAppearances;
-cout << "\n--- Batting Stats ---\n";
-cout << "Enter number of hits: ";
-cin >> hits;
-cout << "Enter number of at-bats: ";
-cin >> atBats;
-cout << "Enter number of walks (batting): ";
-cin >> walksBatting;
-cout << "Enter number of plate appearances: ";
-cin >> plateAppearances;
+    //Batting stats
+    double hits, atBats, walksBatting, plateAppearances;
+    cout << "\n--- Batting Stats ---\n";
+    cout << "Enter number of hits: ";
+    cin >> hits;
+    cout << "Enter number of at-bats: ";
+    cin >> atBats;
+    cout << "Enter number of walks (batting): ";
+    cin >> walksBatting;
+    cout << "Enter number of plate appearances: ";
+    cin >> plateAppearances;
 
 
-//guardar los calulos en variables 
-double whip = calculateWHIP(walksAllowed, hitsAllowed, inningsPitched);
-double era = calculateERA(earnedRuns, inningsPitched);
-double battingAverage = calculateBattingAverage(hits, atBats);
-double obp = calculateOBP(hits, walksBatting, plateAppearances);
+    //guardar los calulos en variables 
+    double whip = calculateWHIP(walksAllowed, hitsAllowed, inningsPitched);
+    double era = calculateERA(earnedRuns, inningsPitched);
+    double battingAverage = calculateBattingAverage(hits, atBats);
+    double obp = calculateOBP(hits, walksBatting, plateAppearances);
 
-//output de datos
-cout << "\n--- Player Performance: " << playerName << " ---\n";
-cout << "Pitching:\n";
-cout << "WHIP: " << whip << endl;
-cout << "IP (Innings Pitched): " << inningsPitched << endl;
-cout << "Strikeouts: " << strikeouts << endl;
-cout << "ERA: " << era << endl;
+    double playerStats[4]; // [WHIP, ERA, Batting Average, OBP]
+    playerStats[0] = whip;
+    playerStats[1] = era;
+    playerStats[2] = battingAverage;
+    playerStats[3] = obp;
 
-cout << "\nBatting:\n";
-cout << "Batting Average: " << battingAverage << endl;
-cout << "OBP (On Base Percentage): " << obp << endl;
+    //output de datos
+    cout << "\n--- Player Performance: " << playerName << " ---\n";
+    cout << "Pitching:\n";
+    cout << "WHIP: " << whip << endl;
+    cout << "IP (Innings Pitched): " << inningsPitched << endl;
+    cout << "Strikeouts: " << strikeouts << endl;
+    cout << "ERA: " << era << endl;
 
-	// guardar datos en un archivo
+    cout << "\nBatting:\n";
+    cout << "Batting Average: " << battingAverage << endl;
+    cout << "OBP (On Base Percentage): " << obp << endl;
+
+    // guardar datos en un archivo
     ofstream outputFile("player_stats.txt", ios::app); // ios::append para juntar lo nuevo con lo viejo
     if (outputFile.is_open()) {
         outputFile << "Player Name: " << playerName << endl;
@@ -156,3 +165,45 @@ cout << "OBP (On Base Percentage): " << obp << endl;
         cout << "Error opening file to save data.\n";//error por si el archivo que intenta abrir no existe
     }
 }
+//Tio Chatgpt
+void combineTwoPlayers() {
+    system("cls");
+    cout << "--- Combine Two Players' Stats ---\n";
+
+    const int SIZE = 4; // [WHIP, ERA, Batting Average, OBP]
+    double player1Stats[SIZE];
+    double player2Stats[SIZE];
+    double combinedStats[SIZE];
+    cout << "\nEnter stats for Player 1:\n";
+    cout << "WHIP: ";
+    cin >> player1Stats[0];
+    cout << "ERA: ";
+    cin >> player1Stats[1];
+    cout << "Batting Average: ";
+    cin >> player1Stats[2];
+    cout << "OBP (On Base Percentage): ";
+    cin >> player1Stats[3];
+    cout << "\nEnter stats for Player 2:\n";
+    cout << "WHIP: ";
+    cin >> player2Stats[0];
+    cout << "ERA: ";
+    cin >> player2Stats[1];
+    cout << "Batting Average: ";
+    cin >> player2Stats[2];
+    cout << "OBP (On Base Percentage): ";
+    cin >> player2Stats[3];
+    // Add the stats
+    for (int i = 0; i < SIZE; i++) {
+        combinedStats[i] = player1Stats[i] + player2Stats[i];
+    }
+    // Show result
+    cout << "\n--- Combined Stats ---\n";
+    cout << "Combined WHIP: " << combinedStats[0] << endl;
+    cout << "Combined ERA: " << combinedStats[1] << endl;
+    cout << "Combined Batting Average: " << combinedStats[2] << endl;
+    cout << "Combined OBP: " << combinedStats[3] << endl;
+    cout << "\nPress Enter to return to the main menu...";
+    cin.ignore();
+    cin.get();
+}
+ //Termina tio chatgpt
