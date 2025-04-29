@@ -86,7 +86,7 @@ void viewPlayerStats() {
     //si no hacemos el cin.ignore() y cin.get() el system cls borra la pantalla antes de poder ver los resultados
 }
 
-//funcion para agregar un nuevo jugador 
+   //Jerik 
 void addNewPlayer() {
     system("cls");
     string playerName;
@@ -127,12 +127,7 @@ void addNewPlayer() {
     double battingAverage = calculateBattingAverage(hits, atBats);
     double obp = calculateOBP(hits, walksBatting, plateAppearances);
 
-    double playerStats[4]; // [WHIP, ERA, Batting Average, OBP]
-    playerStats[0] = whip;
-    playerStats[1] = era;
-    playerStats[2] = battingAverage;
-    playerStats[3] = obp;
-
+    
     //output de datos
     cout << "\n--- Player Performance: " << playerName << " ---\n";
     cout << "Pitching:\n";
@@ -144,6 +139,13 @@ void addNewPlayer() {
     cout << "\nBatting:\n";
     cout << "Batting Average: " << battingAverage << endl;
     cout << "OBP (On Base Percentage): " << obp << endl;
+
+    //Victor
+    double playerStats[4]; // [WHIP, ERA, Batting Average, OBP]
+    playerStats[0] = whip;
+    playerStats[1] = era;
+    playerStats[2] = battingAverage;
+    playerStats[3] = obp;
 
     // guardar datos en un archivo
     ofstream outputFile("player_stats.txt", ios::app); // ios::append para juntar lo nuevo con lo viejo
@@ -206,4 +208,6 @@ void combineTwoPlayers() {
     cin.ignore();
     cin.get();
 }
- //Termina tio chatgpt
+ //OpenAI. (2025). ChatGPT (versión del 4 de abril) 
+ // [Modelo de lenguaje de gran tamaño]. 
+ //https://chatgpt.com/share/681033f2-f890-800c-865f-2af4fe373fef
